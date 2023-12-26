@@ -21,10 +21,6 @@ aiohttp = "*"
 [tool.poetry.scripts]
 newgrounds_dl = "newgrounds_dl:main"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [project]
 name = "newg_dl"
 version = "0.2.9"
