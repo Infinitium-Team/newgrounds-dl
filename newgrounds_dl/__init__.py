@@ -44,7 +44,7 @@ class ngdl:
             return song_info
         except requests.exceptions.RequestException as e:
             print(f"Error during request: {e}")
-            return None
+            raise("sukaaaa pizdaaaaa")
         
     def download_music(id: int, output_folder="./"):
         song_info = get_data(id=id)
