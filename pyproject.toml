@@ -2,9 +2,12 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+[dynamic]
+dependencies = ['requests', 'beautifulsoup4', 'asyncio', 'aiohttp']
+
 [project]
 name = "newg_dl"
-version = "0.2.4"
+version = "0.2.5"
 authors = [
   { name="Connor", email="contact@coneriys.one" },
 ]
@@ -20,6 +23,3 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/Infinitium-Team/newgrounds_dl"
 Issues = "https://github.com/Infinitium-Team/newgrounds_dl/issues"
-
-[dynamic]
-dependencies = ['requests', 'beautifulsoup4', 'asyncio', 'aiohttp']
