@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "requests", "beautifulsoup4", "asyncio", "aiohttp"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -20,3 +20,6 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/Infinitium-Team/newgrounds_dl"
 Issues = "https://github.com/Infinitium-Team/newgrounds_dl/issues"
+
+[dynamic]
+dependencies = ['requests', 'beautifulsoup4', 'asyncio', 'aiohttp']
