@@ -7,7 +7,7 @@ dependencies = ['requests', 'beautifulsoup4', 'asyncio', 'aiohttp']
 
 [project]
 name = "newg_dl"
-version = "0.2.5"
+version = "0.2.6"
 authors = [
   { name="Connor", email="contact@coneriys.one" },
 ]
