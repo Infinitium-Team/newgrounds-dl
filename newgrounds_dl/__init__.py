@@ -76,41 +76,64 @@ class ngdl:
             print(f"Error during request: {e}")
 
     @staticmethod
-    async def get_data_async(id: int, session):
+    async def get_data_async(id: int):
         url = f'https://www.newgrounds.com/audio/listen/{id}'
 
         try:
-            async with session.get(url) as response:
-                response.raise_for_status()  # Проверка наличия ошибок при запросе
-                if response.status != 200:
-                    print("Error: Failed to retrieve song information.")
-                    return None
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url) as response:
+                    response.raise_for_status()  # Проверка наличия ошибок при запросе
+                    if response.status != 200:
+                        print("Error: Failed to retrieve song information.")
+                        return None
 
-                soup = BeautifulSoup(await response.text(), 'html.parser')
+                    soup = BeautifulSoup(await response.text(), 'html.parser')
 
-                # Остальной код остается без изменений
+                    # Ищем элементы на странице для получения информации
+                    title_element = soup.find('h2', class_='rated-e')
+                    author_container = soup.find('h4', class_='smaller')
+                    artist = author_container.find('a').text.strip() if author_container else 'N/A'
+                    rating_element = soup.find('span', class_='pod-head-rating')
+        
+                    # Idiotism
+                    dd_genre_container = soup.find('dl', class_="sidestats flex-1")
+                    genre_container = dd_genre_container.find('dd') if dd_genre_container else 'N/A'
+                    genre_element = genre_container.find('a').text.strip() if genre_container else 'N/A'
+                    
+                    title = title_element.text.strip() if title_element else 'N/A'
+                    genre = genre_element if genre_element else 'N/A'
+                    rating = rating_element.text.strip() if rating_element else 'E'
+        
+                    song_info = {
+                        'title': title,
+                        'artist': artist,
+                        'genre': genre,
+                        'rating': rating,
+                    }
+        
+                    return song_info
 
-        except requests.exceptions.RequestException as e:
+        except Exception as e:
             print(f"Error during request: {e}")
             return None
 
     @staticmethod
     async def download_music_async(id: int, output_folder="./"):
-        async with aiohttp.ClientSession() as session:
-            song_info = await ngdl.get_data_async(id=id, session=session)
-            if song_info is None:
-                print("Failed to retrieve song information.")
-                return
+        song_info = await ngdl.get_data_async(id=id)
+        if song_info is None:
+            print("Failed to retrieve song information.")
+            return
 
-            song_name_old = song_info['title']
-            song_name = song_name_old.replace(" ", "-")
+        song_name_old = song_info['title']
+        song_name = song_name_old.replace(" ", "-")
 
-            # Формирование URL для скачивания
-            base_url = 'https://audio.ngfiles.com'
-            folder_id = str(id)[:4] + '000'
-            audio_url = f'{base_url}/{folder_id}/{id}_{song_name}.mp3'
+        # Формирование URL для скачивания
+        base_url = 'https://audio.ngfiles.com'
+        folder_id = str(id)[:4] + '000'
+        audio_url = f'{base_url}/{folder_id}/{id}_{song_name}.mp3'
 
-            try:
+        try:
+            async with aiohttp.ClientSession() as session:
                 async with session.get(audio_url) as audio_response:
                     audio_response.raise_for_status()
 
@@ -122,8 +145,8 @@ class ngdl:
                         audio_file.write(audio_data)
 
                     print(f"Music downloaded: {output_path}")
-            except aiohttp.ClientResponseError as e:
-                print(f"Error during request: {e}")
+        except aiohttp.ClientResponseError as e:
+            print(f"Error during request: {e}")
 
 if __name__ == "__main__":
     main()
