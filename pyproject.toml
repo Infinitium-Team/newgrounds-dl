@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "newgrounds_dl"
-version = "0.2.3"
+version = "0.2.4"
 authors = [
   { name="Connor", email="contact@coneriys.one" },
 ]
