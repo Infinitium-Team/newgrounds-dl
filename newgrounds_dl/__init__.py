@@ -3,6 +3,7 @@ import aiohttp
 import asyncio
 from bs4 import BeautifulSoup
 import os
+import logging
 
 def main():
     print("Console is not supported.")
@@ -17,6 +18,7 @@ class ngdl:
             response.raise_for_status()  # Проверка наличия ошибок при запросе
             if response.status_code != 200: 
                 print("Error: Failed to retrieve song information.")
+                logging.error("Error: Failed to retrieve song information.")
                 return None
 
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -53,6 +55,7 @@ class ngdl:
         song_info = ngdl.get_data(id=id)
         if song_info is None:
             print("Failed to retrieve song information.")
+            logging.error("Failed to retrieve song information.")
             return
 
         song_name_old = song_info['title']
@@ -85,6 +88,7 @@ class ngdl:
                     response.raise_for_status()  # Проверка наличия ошибок при запросе
                     if response.status != 200:
                         print("Error: Failed to retrieve song information.")
+                        logging.error("Error: Failed to retrieve song information.")
                         return None
 
                     soup = BeautifulSoup(await response.text(), 'html.parser')
@@ -122,6 +126,7 @@ class ngdl:
         song_info = await ngdl.get_data_async(id=id)
         if song_info is None:
             print("Failed to retrieve song information.")
+            logging.error("Failed to retrieve song information.")
             return
 
         song_name_old = song_info['title']
