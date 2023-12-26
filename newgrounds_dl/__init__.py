@@ -2,21 +2,18 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-def main():
-    print("newgrounds_dl not working in console.")
-
-
 class ngdl:
-    # Get song data
+    @staticmethod
     def get_data(id: int):
-        url = f'https://www.newgrounds.com/audio/listen/{id}/json'
-        
+        url = f'https://www.newgrounds.com/audio/listen/{id}'
+
         try:
             response = requests.get(url)
             response.raise_for_status()  # Проверка наличия ошибок при запросе
             if response.status_code != 200: 
-                print("blyat pizdec suka")
-                raise("blyat pizdec suka")
+                print("Error: Failed to retrieve song information.")
+                return None
+
             soup = BeautifulSoup(response.text, 'html.parser')
 
             # Ищем элементы на странице для получения информации
@@ -44,10 +41,15 @@ class ngdl:
             return song_info
         except requests.exceptions.RequestException as e:
             print(f"Error during request: {e}")
-            raise("sukaaaa pizdaaaaa")
-        
+            return None
+
+    @staticmethod
     def download_music(id: int, output_folder="./"):
-        song_info = get_data(id=id)
+        song_info = ngdl.get_data(id=id)
+        if song_info is None:
+            print("Failed to retrieve song information.")
+            return
+
         song_name_old = song_info['title']
         song_name = song_name_old.replace(" ", "-")
 
