@@ -4,6 +4,9 @@ import asyncio
 from bs4 import BeautifulSoup
 import os
 
+def main():
+    print("Console is not supported.")
+
 class ngdl:
     @staticmethod
     def get_data(id: int):
