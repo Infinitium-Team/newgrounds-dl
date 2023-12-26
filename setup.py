@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='newgrounds_dl',
+    name='newg_dl',
     version='0.2.4',
     packages=find_packages(),
     install_requires=[
