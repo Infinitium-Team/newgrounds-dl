@@ -1,19 +1,37 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[dynamic]
-dependencies = ['requests', 'beautifulsoup4', 'asyncio', 'aiohttp']
-scripts = ['newgrounds_dl=newgrounds_dl:main']
+[tool.poetry]
+name = "newg_dl"
+version = "0.2.9"
+description = "A Python library for downloading music from Newgrounds."
+authors = ["Connor <contact@coneriys.one>"]
+readme = "README.md"
+python = "^3.8"
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "*"
+beautifulsoup4 = "*"
+asyncio = "*"
+aiohttp = "*"
+
+[tool.poetry.scripts]
+newgrounds_dl = "newgrounds_dl:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [project]
 name = "newg_dl"
-version = "0.2.8"
-authors = [
-  { name="Connor", email="contact@coneriys.one" },
-]
+version = "0.2.9"
 description = "A Python library for downloading music from Newgrounds."
-readme = "README.md"
+authors = [
+    { name="Connor", email="contact@coneriys.one" },
+]
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
