@@ -3,7 +3,7 @@ requires = ["setuptools", "requests", "beautifulsoup4", "asyncio", "aiohttp"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "newgrounds_dl"
+name = "newg_dl"
 version = "0.2.4"
 authors = [
   { name="Connor", email="contact@coneriys.one" },
