@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='newgrounds_dl',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages(),
     install_requires=[
         'requests',
@@ -10,7 +10,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'newgrounds_dl = module',
+            'newgrounds_dl = newgrounds_dl',
         ],
     },
     author='Connor',
