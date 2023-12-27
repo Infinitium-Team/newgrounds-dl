@@ -249,6 +249,8 @@ class NgDL_test:
                 audio_file.write(audio_data)
 
             print(f"Music downloaded: {output_path}")
-            return output_name
+            return {
+                "outputn": output_name
+            }
         except requests.exceptions.RequestException as e:
             print(f"Error during request: {e}")
