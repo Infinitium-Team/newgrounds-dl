@@ -242,7 +242,7 @@ class NgDL_test:
         try:
             # Загрузка музыки
             audio_data = requests.get(audio_url).content
-            output_path = os.path.join(output_folder, f"{id}_{song_name}.mp3")
+            output_path = os.path.join(output_folder, f"{sid}_{song_name}.mp3")
             output_name = os.path.join(f"{id}_{song_name}.mp3")
 
             with open(output_path, 'wb') as audio_file:

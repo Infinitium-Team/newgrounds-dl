@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "newg_dl"
-version = "0.3.0b4"
+version = "0.3.0b5"
 description = "A Python library for downloading music from Newgrounds."
 authors = ["Connor <contact@coneriys.one>"]
 readme = "README.md"
