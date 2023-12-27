@@ -220,7 +220,8 @@ class NgDL_test:
             return song_info
         except requests.exceptions.RequestException as e:
             print(f"Error during request: {e}")
-            return None
+            logging.error(e)
+            return f"Error: {e}"
 
     @staticmethod
     def download_music(url: str, output_folder="./"):
@@ -228,7 +229,7 @@ class NgDL_test:
         if song_info is None:
             print("Failed to retrieve song information.")
             logging.error("Failed to retrieve song information.")
-            return
+            return "Failed to retrieve song information."
 
         song_name_old = song_info['title']
         song_name = song_name_old.replace(" ", "-")
