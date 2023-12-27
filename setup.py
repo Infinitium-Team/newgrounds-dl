@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='newg_dl',
-    version='0.2.9',
+    version='0.3.0b',
     packages=find_packages(),
     install_requires=[
         'requests',
