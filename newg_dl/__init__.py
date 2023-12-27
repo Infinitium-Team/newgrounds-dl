@@ -181,8 +181,7 @@ class NgDL_test:
         try:
             response = requests.get(url)
             response.raise_for_status()  # Проверка наличия ошибок при запросе
-            if response.status_code != 200: 
-                print("Error: Failed to retrieve song information.")
+            if response.status_code != 200:
                 logging.error("Error: Failed to retrieve song information.")
                 return "Error: Failed to retrieve song information."
 
@@ -244,10 +243,12 @@ class NgDL_test:
             # Загрузка музыки
             audio_data = requests.get(audio_url).content
             output_path = os.path.join(output_folder, f"{id}_{song_name}.mp3")
+            output_name = os.path.join(f"{id}_{song_name}.mp3")
 
             with open(output_path, 'wb') as audio_file:
                 audio_file.write(audio_data)
 
             print(f"Music downloaded: {output_path}")
+            return output_name
         except requests.exceptions.RequestException as e:
             print(f"Error during request: {e}")
